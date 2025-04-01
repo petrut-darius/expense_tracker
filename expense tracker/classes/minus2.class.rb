@@ -1,5 +1,11 @@
+require_relative "../modules/connection.module.rb"
+require_relative "./minus.class.rb"
+
 class InsertMinus < Minus
+  extend Connection
+
   def initialize(username, value)
+    @@conn = self.class.use_connection
     @username = username
     @value = value
     @id = self.class.get_the_id(@username)
@@ -7,7 +13,6 @@ class InsertMinus < Minus
   end
 
   def self.insert(id, value)
-    conn = PG.connect(dbname: 'expense_tracker', user: 'postgres', password: '30ianpdi', host: 'localhost')
-    conn.exec_params("INSERT INTO minus (expense_value, user_id) VALUES ($1, $2)", [value, id])
+    @@conn.exec_params("INSERT INTO minus (expense_value, user_id) VALUES ($1, $2)", [value, id])
   end
 end
