@@ -17,7 +17,7 @@ class Plus
 
   def self.get_the_values(id)
     result_from_db = @@conn.exec("SELECT * FROM plus WHERE user_id = $1", [id])
-    return result_from_db[0]
+    return result_from_db
   end
 
 end

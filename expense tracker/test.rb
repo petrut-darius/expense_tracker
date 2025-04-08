@@ -1,13 +1,15 @@
 require "pg"
-require_relative "./classes/plus.class.rb"
+require_relative "./classes/minus.class.rb"
 
 puts "Enter a name"
 username = gets.chomp.to_s
 
 
-values_plus = Plus.new(username)
+values_minus = Minus.new(username)
 
-puts values_plus.instance_variable_get(:@values).each do |key, value|
-    puts "#{key}: #{value}"
+x = 0.0
+values_minus.instance_variable_get(:@values).each do |row|
+    x += row["expense_value"].to_f
 end
 
+puts x

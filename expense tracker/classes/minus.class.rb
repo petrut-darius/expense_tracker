@@ -2,7 +2,7 @@ class Minus
   def initialize(username)
     @username = username
     @id = self.class.get_the_id(@username)
-    return self.class.get_the_values(@id)
+    @values = self.class.get_the_values(@id)
   end
 
   def self.get_the_id(username)
@@ -14,7 +14,7 @@ class Minus
   def self.get_the_values(id)
     conn = PG.connect(dbname: 'expense_tracker', user: 'postgres', password: '30ianpdi', host: 'localhost') 
     result_from_db = conn.exec("SELECT * FROM minus WHERE user_id = $1", [id])
-    return result_from_db[0]
+    return result_from_db
   end
 
 end
