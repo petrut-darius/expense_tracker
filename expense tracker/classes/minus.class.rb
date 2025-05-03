@@ -1,3 +1,5 @@
+require_relative "../modules/connection.module.rb"
+
 class Minus
   def initialize(username)
     @@conn = self.class.use_connection
